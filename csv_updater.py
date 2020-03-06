@@ -11,8 +11,6 @@
 
 from bs4 import BeautifulSoup
 from urllib import request
-
-
 def get_nums():
     url = 'https://www.worldometers.info/coronavirus/'
     html = request.urlopen(url).read().decode('utf8')
@@ -24,6 +22,5 @@ def get_nums():
     total_cases = int(total_cases.replace(",", ''))
     deaths = int(deaths.replace(",", ''))
     return total_cases, deaths
-
 
 get_nums()
