@@ -12,13 +12,18 @@
 from bs4 import BeautifulSoup
 from urllib import request
 
-url = 'https://www.worldometers.info/coronavirus/'
-html = request.urlopen(url).read().decode('utf8')
-html[:60]
-soup = BeautifulSoup(html, 'html.parser')
-title = soup.find('title')
-total_cases = title.string[27:33]
-deaths = title.string[44:50]
 
-print(total_cases)
-print(deaths)
+def get_nums():
+    url = 'https://www.worldometers.info/coronavirus/'
+    html = request.urlopen(url).read().decode('utf8')
+    html[:60]
+    soup = BeautifulSoup(html, 'html.parser')
+    title = soup.find('title')
+    total_cases = title.string[27:33]
+    deaths = title.string[44:50]
+    total_cases = int(total_cases.replace(",", ''))
+    deaths = int(deaths.replace(",", ''))
+    return total_cases, deaths
+
+
+get_nums()
